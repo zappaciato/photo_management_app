@@ -4,7 +4,8 @@ from unique_filename_generator import generate_unique_suffix
 
 def rename(new_filename_base, unique_suffix, output_path, image_path, filename):
     new_filename = f"{new_filename_base}.{unique_suffix}.jpg"
-    new_image_path = os.path.join(output_path, new_filename)
+    # new_image_path = os.path.join(output_path, new_filename)
+    new_image_path = os.path.join(os.path.dirname(image_path), new_filename)
     # Rename the file
     os.rename(image_path, new_image_path)
     print(f"Renamed {filename} to {new_filename}")
@@ -31,7 +32,6 @@ def rename_files(folder_path, output_path):
                     new_filename_base = format_metadata(lat, lon, photo_datetime)
                     unique_suffix = generate_unique_suffix()
                     rename(new_filename_base, unique_suffix, output_path, image_path, filename)
-
             else:
                     new_filename_base = "edited_file"
                     unique_suffix = generate_unique_suffix()

@@ -16,7 +16,11 @@ def create_photo_map(folder_path, output_path):
                 metadata = get_image_metadata(image_path)
                 print("Tyle razy odpala create thumbnailfile")
 
-                
+                # Calculate relative path
+                # relative_path = os.path.relpath(image_path)
+                relative_path = os.path.relpath(image_path, output_path).replace(os.sep, '/')
+                print("__________________________________")
+                print(relative_path)
                 if metadata:
                     thumb_filename = create_thumbnail_file(image_dir, filename, image_path)
                     # lat, lon, photo_datetime, data_url = metadata
@@ -25,7 +29,7 @@ def create_photo_map(folder_path, output_path):
                     if photo_datetime:
                         popup_text += f"<br>Date/Time: {photo_datetime}"
 
-                    popup_text += f"<br><a href='{filename}' target='_blank'><img src='thumbnails/{thumb_filename}' width='100'></a>"
+                    popup_text += f"<br><a href='{relative_path}' target='_blank'><img src='thumbnails/{thumb_filename}' width='100'></a>"
                                     # Create thumbnail file
 
                     print("About to generate a map")
