@@ -1,9 +1,10 @@
 import exifread
 from utils import gps_to_decimal, parse_datetime
-import base64
+from thumbnails_generator import create_thumbnail
 
 def get_image_metadata(image_path):
     """Extracts GPS coordinates, direction, and datetime from an image."""
+
     try:
         with open(image_path, 'rb') as f:
             tags = exifread.process_file(f)
@@ -14,13 +15,15 @@ def get_image_metadata(image_path):
 
                 photo_datetime = parse_datetime(tags.get('Image DateTime'))
 
-                # Create a thumbnail base64
-                with open(image_path, "rb") as image_file:
-                    encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
-                data_url = f"data:image/jpeg;base64,{encoded_string}"
+                # # Create a thumbnail base64
+                # with open(image_path, "rb") as image_file:
+                #     encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+                # data_url = f"data:image/jpeg;base64,{encoded_string}"
 
-                return lat, lon, photo_datetime, data_url
-                # return lat, lon, photo_datetime
+                # thumbnail_path = create_thumbnail(image_path)
+
+                # return lat, lon, photo_datetime, data_url
+                return lat, lon, photo_datetime
             else:
                 return None
     except (FileNotFoundError, KeyError, ValueError, exifread.heic.NoParser) as e:

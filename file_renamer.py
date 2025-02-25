@@ -10,7 +10,8 @@ def rename_files(folder_path, output_path):
         for filename in filenames:
             if filename.lower().endswith(('.jpg', '.jpeg', '.png')):
                 image_path = os.path.join(root, filename)
-                lat, lon, photo_datetime, image_url = get_image_metadata(image_path)
+                # lat, lon, photo_datetime, image_url = get_image_metadata(image_path)
+                lat, lon, photo_datetime = get_image_metadata(image_path)
                 
                 if lat is not None and lon is not None and photo_datetime is not None:
                     lat_str = str(int(lat * 10000)).replace('.', '')
@@ -32,4 +33,5 @@ def rename_files(folder_path, output_path):
                     print(f"Renamed {filename} to {new_filename}")
                 else:
                     print(f"Metadata missing for {filename}, skipping.")
+                    lat, lon, photo_datetime, image_url = get_image_metadata(image_path)
     
