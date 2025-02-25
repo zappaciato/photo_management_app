@@ -12,7 +12,6 @@ def get_image_metadata(image_path):
                 lat = gps_to_decimal(tags['GPS GPSLatitude'].values)
                 lon = gps_to_decimal(tags['GPS GPSLongitude'].values)
 
-                direction = float(tags['GPS ImgDirection'].values) if 'GPS ImgDirection' in tags else None
                 photo_datetime = parse_datetime(tags.get('Image DateTime'))
 
                 # Create a thumbnail base64
@@ -20,7 +19,8 @@ def get_image_metadata(image_path):
                     encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
                 data_url = f"data:image/jpeg;base64,{encoded_string}"
 
-                return lat, lon, direction, photo_datetime, data_url
+                return lat, lon, photo_datetime, data_url
+                # return lat, lon, photo_datetime
             else:
                 return None
     except (FileNotFoundError, KeyError, ValueError, exifread.heic.NoParser) as e:

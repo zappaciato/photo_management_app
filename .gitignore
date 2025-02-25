@@ -1,0 +1,6 @@
+__pycache__/
+*.log
+.venv/        # If you're using a virtual environment named .venv
+venv/         # if the venv is named venv
+*.pyc
+*.html #if you don't want to track the html file.

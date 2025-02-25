@@ -13,10 +13,8 @@ def create_photo_map(folder_path, output_path):
                 metadata = get_image_metadata(image_path)
 
                 if metadata:
-                    lat, lon, direction, photo_datetime, data_url = metadata
+                    lat, lon, photo_datetime, data_url = metadata
                     popup_text = f"<b>{filename}</b>"
-                    if direction:
-                        popup_text += f"<br>Direction: {direction:.2f} degrees"
                     if photo_datetime:
                         popup_text += f"<br>Date/Time: {photo_datetime}"
                     popup_text += f"<br><img src='{data_url}' width='100'>"
