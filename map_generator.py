@@ -14,11 +14,11 @@ def create_photo_map(folder_path, output_path):
             if filename.lower().endswith(('.jpg', '.jpeg', '.png')):
                 image_path = os.path.join(root, filename)
                 metadata = get_image_metadata(image_path)
-                
-                # Create thumbnail file
-                thumb_filename = create_thumbnail_file(image_dir, filename, image_path)
+                print("Tyle razy odpala create thumbnailfile")
+
                 
                 if metadata:
+                    thumb_filename = create_thumbnail_file(image_dir, filename, image_path)
                     # lat, lon, photo_datetime, data_url = metadata
                     lat, lon, photo_datetime = metadata
                     popup_text = f"<b>{filename}</b>"
@@ -26,6 +26,7 @@ def create_photo_map(folder_path, output_path):
                         popup_text += f"<br>Date/Time: {photo_datetime}"
 
                     popup_text += f"<br><a href='{filename}' target='_blank'><img src='thumbnails/{thumb_filename}' width='100'></a>"
+                                    # Create thumbnail file
 
                     print("About to generate a map")
                     folium.Marker(location=[lat, lon], popup=popup_text).add_to(m)
