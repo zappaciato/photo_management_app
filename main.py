@@ -7,4 +7,3 @@ if __name__ == "__main__":
     output_path = r"C:\Users\kflakiewicz\Desktop\Media_Kris\GeoPhoto_app\Photos"
     rename_files(folder_path, output_path)
     create_photo_map(folder_path, output_path)
-    
