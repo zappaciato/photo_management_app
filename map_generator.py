@@ -11,18 +11,14 @@ def create_photo_map(output_path, thumbs_path):
     image_dir = create_thumbnail_folder(thumbs_path)
 
     for root, _, filenames in os.walk(output_path):
-        # if root not in initial_folders:
-        #     continue
         for filename in filenames:
             if filename.lower().endswith(('.jpg', '.jpeg', '.png')):
                 image_path = os.path.join(root, filename)
                 metadata = get_image_metadata(image_path)
-                print("Colected metadata")
+                print("Collected metadata")
 
-                            # Calculate relative path
-                            # relative_path = os.path.relpath(image_path)
                 relative_image_path = os.path.relpath(image_path, thumbs_path).replace(os.sep, '/')
-                relative_thumb_path = os.path.relpath(thumbs_path, thumbs_path).replace(os.sep, '/')
+                # relative_thumb_path = os.path.relpath(thumbs_path, thumbs_path).replace(os.sep, '/')
                 relative_path = os.path.relpath(image_path, output_path).replace(os.sep, '/')
                 print("________________FOR_FILE::__________________")
                 print(relative_path)
@@ -37,7 +33,7 @@ def create_photo_map(output_path, thumbs_path):
 
                 popup_text += f"<br><a href='{relative_image_path}' target='_blank'><img src='thumbnails/{thumb_filename}' width='100'></a>"
 
-                print("About to generate a map")
+                print("Putting the photo on a map.....")
                 folium.Marker(location=[lat, lon], popup=popup_text).add_to(m)
 
                 m.save(os.path.join(thumbs_path, 'photo_map.html'))

@@ -4,15 +4,6 @@ from unique_filename_generator import generate_unique_suffix
 import shutil
 from file_validation import validate_file
 
-# def rename(new_filename_base, unique_suffix, image_path, filename, output_path):
-#     new_filename = f"{new_filename_base}.{unique_suffix}.jpg"
-#     # new_image_path = os.path.join(output_path, new_filename)
-#     new_image_path = os.path.join(os.path.dirname(image_path), new_filename)
-#     # new_image_path = os.path.join(output_path, new_filename)  # Use output_path here
-#     # Rename the file
-#     os.rename(image_path, new_image_path)
-#     print(f"Renamed {filename} to {new_filename}")
-
 def rename_files(folder_path, output_path):
 
     edited_folder = os.path.join(output_path, "edited_files")  # Create edited_folder path in the root folder
@@ -38,12 +29,14 @@ def rename_files(folder_path, output_path):
                     print(f"Moved {filename} to video_files folder.")
 
                 elif isinstance(file_status, tuple) and len(file_status) == 3: # Check if it is a tuple of 3 items.:
-                    print("found a valid photo file and processing name...")
+
+                    print("Found a valid photo file and processing its name...")
                     lat, lon, photo_datetime = file_status
                     new_filename_base = format_metadata(lat, lon, photo_datetime)
                     unique_suffix = generate_unique_suffix()
                     new_filename = f"{new_filename_base}.{unique_suffix}.jpg"
-
+                    
+                    print("New name created and about to rename the file...")
                     new_image_path = os.path.join(os.path.dirname(image_path), new_filename)
                     os.rename(image_path, new_image_path)
                     print(f"Renamed {filename} to {new_filename}")
@@ -54,7 +47,7 @@ def rename_files(folder_path, output_path):
                     print(f"Moved {filename} to {result_folder} folder.")
 
                 elif file_status == False:
-                    print("Found foto file with metadata missing or edited...")
+                    print("Found foto file with metadata missing due to editing...")
                     os.makedirs(edited_folder, exist_ok=True)
                     shutil.move(image_path, os.path.join(edited_folder, filename))
                     print(f"Moved {filename} to edited_files folder.")

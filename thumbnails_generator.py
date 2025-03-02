@@ -7,7 +7,7 @@ def create_thumbnail(image_path, thumb_path, size=(400, 300)):
         img = Image.open(image_path)
         img.thumbnail(size)
         img.save(thumb_path)
-        print(" :):):) successfully created thumbNail :) :) :) ")
+        print("Successfully created thumbNail")
 
     except Exception as e:
         print(f"Error creating thumbnail: {e}")
@@ -18,16 +18,6 @@ def create_thumbnail_folder(output_path):
     os.makedirs(image_dir, exist_ok=True)
     return image_dir
 
-# def create_thumbnail(image_path, thumb_path, size=(400, 300)):
-#     """Creates a thumbnail image file."""
-#     try:
-#         img = Image.open(image_path)
-#         img.thumbnail(size)
-#         img.save(thumb_path)
-#         print(" :):):) successfully created thumbNail :) :) :) ")
-
-#     except Exception as e:
-#         print(f"Error creating thumbnail: {e}")
 
 def create_thumbnail_file(image_dir, filename, image_path):
     """Creates a thumbnail file and returns its path."""
