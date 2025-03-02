@@ -32,6 +32,7 @@ def create_thumbnail_folder(output_path):
 def create_thumbnail_file(image_dir, filename, image_path):
     """Creates a thumbnail file and returns its path."""
     try:
+        
         thumb_filename = f"{os.path.splitext(filename)[0]}.thumb.jpg"
         print("!!!Creating a thumbnail file!!!!")
         thumb_path = os.path.join(image_dir, thumb_filename)
