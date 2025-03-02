@@ -14,14 +14,14 @@ def get_image_metadata(image_path):
                 lon = gps_to_decimal(tags['GPS GPSLongitude'].values)
                 photo_datetime = parse_datetime(tags.get('Image DateTime'))
                 return lat, lon, photo_datetime
-            if tags is None :
+            if tags is None : #tutaj jest cos nie tak
                 lat = 00
                 lon = 00
                 photo_datetime = "xxxx-xx"
                 return lat, lon, photo_datetime
     except (FileNotFoundError, KeyError, ValueError, exifread.heic.NoParser) as e:
         print(f"Error processing {image_path}: {e}")
-        return None
+        return lat, lon, photo_datetime
         
 def format_metadata(lat, lon, photo_datetime):
     lat_str = str(int(lat * 10000)).replace('.', '')
