@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 
+
 def create_thumbnail(image_path, thumb_path, size=(400, 300)):
     """Creates a thumbnail image file."""
     try:

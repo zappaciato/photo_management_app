@@ -29,5 +29,8 @@ def validate_file(image_path):
         except Exception: #Catch any errors from the metadata reading.
             return False # If there is an error, we can assume metadata missing.
 
-    else:
-        return "other"
+    elif filename.lower().endswith(('.txt', '.doc', '.docx', '.xls', '.xlsx', '.pdf')):
+        return "other_file_type"
+    
+    elif filename.lower().endswith(('.mp3', '.wav', '.flac', '.aac', '.ogg')): #added audio
+        return "audio_file"
