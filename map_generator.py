@@ -3,15 +3,15 @@ import os
 import config
 from metadata_extractor import get_image_metadata
 from thumbnails_generator import create_thumbnail_file, create_thumbnail_folder
-from video_file_metadata_extractor import get_video_metadata, generate_video_thumbnail
 
-def create_photo_map(output_path, thumbs_path):
+
+def create_photo_map(images_path, thumbs_path):
 
     """Creates an HTML map with markers for photos with GPS data.  Creates an HTML map with separate thumbnail files and links to original images."""
     m = folium.Map(location=[0, 0], zoom_start=2)
-    image_dir = create_thumbnail_folder(config.THUMBS_PATH)
+    image_dir = create_thumbnail_folder(thumbs_path)
 
-    for root, _, filenames in os.walk(output_path):
+    for root, _, filenames in os.walk(images_path):
         for filename in filenames:
             if filename.lower().endswith(('.jpg', '.jpeg', '.png')):
                 image_path = os.path.join(root, filename)
@@ -20,7 +20,7 @@ def create_photo_map(output_path, thumbs_path):
 
                 relative_image_path = os.path.relpath(image_path, thumbs_path).replace(os.sep, '/')
                 # relative_thumb_path = os.path.relpath(thumbs_path, thumbs_path).replace(os.sep, '/')
-                relative_path = os.path.relpath(image_path, output_path).replace(os.sep, '/')
+                relative_path = os.path.relpath(image_path, images_path).replace(os.sep, '/')
                 print("________________FOR_FILE::__________________")
                 print(relative_path)
                 if metadata:
@@ -39,7 +39,4 @@ def create_photo_map(output_path, thumbs_path):
 
                 m.save(os.path.join(thumbs_path, 'photo_map.html'))
 
-# def create_video_map(output_path, thumbs_path):
-#     m = folium.Map(location=[0, 0], zoom_start=2)
-#     ivideo_dir = create_thumbnail_folder(thumbs_path)
-# m.save(os.path.join(thumbs_path, 'video_map.html'))
+                
