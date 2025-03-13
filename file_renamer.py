@@ -57,7 +57,12 @@ def rename_files(folder_path, output_path):
             elif file_status == False:
                 print("Found foto file with metadata missing due to editing...")
                 os.makedirs(edited_folder, exist_ok=True)
-                shutil.move(image_path, os.path.join(edited_folder, filename))
+                new_filename = f"{filename}.{generate_unique_suffix()}.jpg"
+                    
+                print("New name created and about to rename the file...")
+                new_image_path = os.path.join(os.path.dirname(image_path), new_filename)
+                os.rename(image_path, new_image_path)
+                shutil.move(new_image_path, os.path.join(edited_folder, new_filename))
                 print(f"Moved {filename} to edited_files folder.")
 
                 edited_files_count += 1
